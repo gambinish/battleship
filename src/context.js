@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState } from "react";
 
 export const GameContext = React.createContext();
 

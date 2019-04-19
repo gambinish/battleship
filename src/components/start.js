@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Link } from "react-router-dom";
 
 const GameOver = () => (
   <div>
