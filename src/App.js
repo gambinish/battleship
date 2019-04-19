@@ -1,28 +1,44 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
+import "./App.css";
+import { GameContext } from "./context";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+import GameOver from "./components/start";
+import Board from "./components/board";
+
+const App = () => {
+  const { hits } = useContext(GameContext);
+  let redirectToHome;
+  useEffect(() => {
+    console.log(hits);
+    // trying to redirect to a clean slate after reaching 8 hits
+    if (hits === 8) {
+      // hack:
+      // window.location.pathname = '/game-over';
+      // trying to accomplish ^^^ without page reloading
+      redirectToHome = <Redirect to={Board} />;
+    }
+  }, [hits]);
+
+  return (
+    <div className="App">
+      <h1>This is Battleship</h1>
+      <Router>
+        <div>{redirectToHome}</div>
+        <Link to="/game">Start Game</Link>
+        <br />
+        <br />
+        <Link to="/game-over">End Game</Link>
+        <Route path="/game" render={Board} />
+        <Route path="/game-over" render={GameOver} />
+      </Router>
+    </div>
+  );
+};
 
 export default App;
