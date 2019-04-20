@@ -1,6 +1,6 @@
 * clone repo
 
-* npm install for dependencies
+* `npm install` for dependencies
 
 * `npm start` to run frontend application
 
