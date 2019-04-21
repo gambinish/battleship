@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import io from "socket.io-client";
 
 const ChatRoom = () => {
   let [username, setUsername] = useState("");
   let [message, setMessage] = useState("");
   let [messages, setMessages] = useState([]);
-  let endpoint = "localhost:8080";
+  const endpoint = "localhost:8080";
 
   const socket = io(endpoint);
 
-  socket.on("RECEIVE_MESSAGE", function(data) {
+  socket.on("RECEIVE_MESSAGE", data => {
+    // alert(data);
+    // console.log(data.message);
     addMessage(data);
   });
 

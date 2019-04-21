@@ -1,4 +1,5 @@
 import React from "react";
+import io from "socket.io-client";
 import styled from "styled-components";
 import boardData from "../data/boardData";
 
@@ -15,12 +16,20 @@ const BoardWrapper = styled.div`
 `;
 
 const Board = () => {
+  const endpoint = "localhost:8080";
+  const socket = io(endpoint);
+  socket.on("RECEIVE_MISSLE", data => {
+    console.log(data);
+    // setTargets([...targets, data.id]);
+  });
   return (
-    <BoardWrapper>
-      {boardData.map((data, index) => (
-        <Square key={index} id={data.id} hasShip={data.hasShip} />
-      ))}
-    </BoardWrapper>
+    <React.Fragment>
+      <BoardWrapper>
+        {boardData.map((data, index) => (
+          <Square key={index} id={data.id} hasShip={data.hasShip} />
+        ))}
+      </BoardWrapper>
+    </React.Fragment>
   );
 };
 

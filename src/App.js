@@ -1,10 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import {
-  Redirect,
-  BrowserRouter as Router,
-  Route,
-  Link
-} from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
 import { GameContext } from "./context";
 
